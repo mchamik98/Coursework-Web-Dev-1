@@ -29,8 +29,8 @@
                 </h3>
                 <h3>
                     Sort by:
-                    <button @click="priceLowHigh">Price low to High</button>
-                    <button @click="priceHighLow">Price High to Low</button>
+                    <button @click="LowHigh">Price low to High</button>
+                    <button @click="HighLow">Price High to Low</button>
                 </h3>
             </div>
                     <div v-for="product in sortedProducts">
@@ -130,10 +130,10 @@
                     submitForm(){
                         alert("Order has been placed");
                     },
-                    priceLowHigh(){
+                    LowHigh(){
                         this.products.sort((a, b) => a.price > b.price ? 1 : -1);
                     },
-                    priceHighLow(){
+                    HighLow(){
                         this.products.sort((a,b) => a.price < b.price ? 1 : -1);
                     },
                     canAddToCart(product){
