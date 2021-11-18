@@ -12,7 +12,7 @@ let products = [
         id: 2,
         subject: "Football",
         location: "Hendon",
-        price: 40,
+        price: 47,
         image: "pictures/Football.png",
         availableInventory: 5,
         spaces: 5,
