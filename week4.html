@@ -14,7 +14,6 @@
     </head>
     <body>
         <div id="app">
-            <header>
                     <h1 v-text="sitename"></h1>
                     <button v-on:click="showCheckout" v-if="cartItemCount>0">
                         {{cartItemCount}}
@@ -22,7 +21,6 @@
                         Checkout
                     </button>
                     <button hidden v-else></button>
-            </header>
         <main>
         <div v-if="showProduct">
             <div>
@@ -60,7 +58,7 @@
                 <h2>Checkout</h2>
                 <p>
                     <strong>First name: </strong>
-                    <input v-model="order.firstName">
+                    <input v-model="order.name">
                 </p>
                 <p>
                     <strong>Last name: </strong>
@@ -68,20 +66,19 @@
                 </p>
                 <p>
                     <strong>Phone Number: </strong>
-                    <input v-model="order.phoneNumber">
+                    <input v-model="order.number">
                 </p>
 
-                <h3>Order information</h3>
-                <p>First name: {{order.firstName}}</p>
-                <p>First name: {{order.lastName}}</p>
-                <p>Phone number: {{order.phoneNumber}}</p>
+                <h3>Details:</h3>
+                <p>First name: {{order.name}}</p>
+                <p>Last name: {{order.lastName}}</p>
+                <p>Phone number: {{order.number}}</p>
 
                 <button @click="submitForm" v-if="canPlaceOrder">Place Order</button>
                 <button disabled v-else>Place Order</button>
-            </div>
 
-            <div class="orderList">
-                <h2>Order List</h2>
+            <div>
+                <h2>Ordered items</h2>
                 <div v-for="(cartItem, key) in cart">
                     <p>{{cartItem}}
                         <button @click ="removeFromCart(cartItem, key)">Remove</button>
@@ -89,6 +86,7 @@
                 </div> 
             </div>
 
+        </main>
         </div>
     
             
@@ -102,9 +100,9 @@
                     sitename: "After School Club",
                     products: products,
                     order: {
-                        firstName: '',
+                        name: '',
                         lastName:'',
-                        phoneNumber:''
+                        number:''
 
                     },
                     search: '',
@@ -152,28 +150,26 @@
                     return count
                     }
                 },
-               computed: {
+                computed: {
                    cartItemCount(){
                        return this.cart.length || ' ';
                    },
                
-               sortedProducts(){
-            return this.products.filter((product) => {
-                return (product.subject.toLowerCase().match(this.search) || product.subject.match(this.search));
+                    sortedProducts(){
+                        return this.products.filter((product) => {
+                        return (product.subject.toLowerCase().match(this.search) || product.subject.match(this.search));
                 
-            });
-        },
-        canPlaceOrder(){
+                    });
+                    },  
+                    canPlaceOrder(){
+                        let regex = new RegExp(/^[a-zA-Z]+$/);
 
-           
-    let regex = new RegExp(/^[a-zA-Z]+$/);
-
-    if ((this.order.firstName && this.order.lastName && this.order.phoneNumber) && (regex.test(this.order.firstName) == true && regex.test(this.order.lastName) == true ) &&(!isNaN((this.order.phoneNumber)))) {
-    return true;
-    }
-    else{
-    return false;
-    }
+                        if ((this.order.name && this.order.lastName && this.order.number) && (regex.test(this.order.name) == true && regex.test(this.order.lastName) == true ) &&(!isNaN((this.order.number)))) {
+                        return true;
+                        }
+                        else{
+                        return false;
+                        }
 
     
 }},
