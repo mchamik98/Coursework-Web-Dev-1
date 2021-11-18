@@ -16,7 +16,7 @@
         <div id="app">
             <header>
                     <h1 v-text="sitename"></h1>
-                    <button v-on:click="showCheckout" v-if="cartItemCount>0"></button>
+                    <button v-on:click="showCheckout" v-if="cartItemCount>0">
                         {{cartItemCount}}
                         <span class="fas fa-cart-plus"></span>
                         Checkout
@@ -107,6 +107,7 @@
                         phoneNumber:''
 
                     },
+                    search: '',
 
                     showProduct: true,
                     cart: [],
@@ -121,22 +122,22 @@
                         this.showProduct = this.showProduct ? false : true;
                     },
                     removeFromCart(subjectName, key){
-            this.products.forEach(product => {
-                if(product.subject == subjectName){
-                    product.spaces++;
-                    this.cart.splice(key, 1);
-                }
-            })
-        },
-        submitForm(){
-            alert("Order has been placed");
-        },
-        priceLowHigh(){
-            this.products.sort((a, b) => a.price > b.price ? 1 : -1);
-        },
-        priceHighLow(){
-            this.products.sort((a,b) => a.price < b.price ? 1 : -1);
-        },
+                        this.products.forEach(product => {
+                            if(product.subject == subjectName){
+                            product.spaces++;
+                            this.cart.splice(key, 1);
+                    }
+                    })
+                    },
+                    submitForm(){
+                        alert("Order has been placed");
+                    },
+                    priceLowHigh(){
+                        this.products.sort((a, b) => a.price > b.price ? 1 : -1);
+                    },
+                    priceHighLow(){
+                        this.products.sort((a,b) => a.price < b.price ? 1 : -1);
+                    },
                     canAddToCart(product){
                         return product.availableInventory > this.cartCount(product.subject);
                     },
@@ -162,8 +163,20 @@
                 
             });
         },
-    
+        canPlaceOrder(){
+
+           
+    let regex = new RegExp(/^[a-zA-Z]+$/);
+
+    if ((this.order.firstName && this.order.lastName && this.order.phoneNumber) && (regex.test(this.order.firstName) == true && regex.test(this.order.lastName) == true ) &&(!isNaN((this.order.phoneNumber)))) {
+    return true;
     }
+    else{
+    return false;
+    }
+
+    
+}},
 });
         </script>
     </body>
