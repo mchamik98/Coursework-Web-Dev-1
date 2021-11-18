@@ -154,7 +154,6 @@
                    cartItemCount(){
                        return this.cart.length || ' ';
                    },
-               
                     sortedProducts(){
                         return this.products.filter((product) => {
                         return (product.subject.toLowerCase().match(this.search) || product.subject.match(this.search));
