@@ -25,12 +25,12 @@
         <div v-if="showProduct">
             <div>
                 <h3>
-                    Search: <input type="text" v-model="search" placeholder="Search classes">
+                    Search: <input type="text" v-model="search">
                 </h3>
                 <h3>
                     Sort by:
-                    <button @click="LowHigh">Price low to High</button>
-                    <button @click="HighLow">Price High to Low</button>
+                    <button v-on:click="LowHigh">Price low to High</button>
+                    <button v-on:click="HighLow">Price High to Low</button>
                 </h3>
             </div>
                     <div v-for="product in sortedProducts">
@@ -155,7 +155,6 @@
                     sortedProducts(){
                         return this.products.filter((product) => {
                         return (product.subject.toLowerCase().match(this.search) || product.subject.match(this.search));
-                
                     });
                     },  
                     canPlaceOrder(){
